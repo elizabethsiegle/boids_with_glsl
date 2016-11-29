@@ -1,8 +1,8 @@
 #version 150
 
-in vec4 fragCol;
-out vec4 outCol;
+flat in vec4 col;
+out vec4 fCol;
 
 void main() {
-     outCol = fragCol;
+  fCol = col;
 }

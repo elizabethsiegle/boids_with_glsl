@@ -9,7 +9,7 @@ typedef struct node {
   struct node *next;
 } Node;
 
-void push(Node** head, void *newOne, size_t dataSize);
+void push(Node** head, void *new1, size_t dataSize);
 void deleteList(Node** head);
 void printList(Node *node, void (*fpoint)(void*));
 void printI(void *n);
@@ -18,14 +18,14 @@ void printB(void *m);
 int vall(Node *node, int index, int totIndex);
 double valD(Node *node, int index, int totIndex);
 bool valB(Node *node, int index, int totIndex);
-void addF(Node **head, int index, int totIndex, float addVal);
-float valF(Node *node, int index, int totIndex);
-double valD(Node *node, int index, int totIndex);
-int valI(Node *node, int index, int totIndex);
-void multiF(Node **head, int index, int totIndex, float multiVal);
+void addF(struct node **head, int index, int totIndex, float addVal);
+float valF(struct node *node, int index, int totIndex);
+double valD(struct node *node, int index, int totIndex);
+int valI(struct node *node, int index, int totIndex);
+void multiF(struct node **head, int index, int totIndex, float multiVal);
 void printFloat(void *k);
-void deleteNode(Node **head, int index, int totIndex);
-void push(Node** head, void *newOne, size_t dataSize);
+void deleteNode(struct node **head, int index, int totIndex);
+void push(Node** head, void *new1, size_t dataSize);
 Node* makeNode();
 Node* makeList();
 

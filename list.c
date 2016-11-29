@@ -2,26 +2,20 @@
 #include <stdbool.h>
 #include "list.h"
 
-// struct node {
-//     void  *num;
-//     struct node *next;
-//     struct node *prev;
-// };
-
-void push(struct node** head, void *newLol, size_t dataSz) {
+void push(Node** head, void *new1, size_t dataSize) {
     //Memory for node
-    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    Node* newNode = (struct node*)malloc(sizeof(struct node));
     //new node
-    newNode -> num  = malloc(dataSz);
-    newNode -> next = (*head);
-    for(int i = 0; i < dataSz; i++) {
-        *(char *)(newNode->num + i) = *(char *)(newLol + i);
+    newNode->num  = malloc(dataSize);
+    newNode->next = (*head);
+    for(int i = 0; i < dataSize; i++) {
+        *(char *)(newNode->num + i) = *(char *)(new1);
     }
     (*head) = newNode;
 }
 
 //****Delete list*****//
-void deleteList(struct node** head) {
+void deleteList(Node** head) {
    printf("\nlist deleted!\n");
    struct node* here = *head;
    struct node* next;
@@ -136,28 +130,68 @@ float valF(struct node *node, int index, int totIndex) {
     return temp;
 }
 
+void addF(struct node **head, int index, int totIndex, float addVal) {
+  //add value to a give index
+  struct node* newVal = *head;
+  index = totIndex - index;
+  for (int i=0; newVal!=NULL && i<index; i++) {
+     newVal = newVal->next;
+  }
+  *((float *)(newVal->num)) += addVal;
+}
+
+//*********multiply******//
+void multiF(struct node **head, int index, int totIndex, float multiVal) {
+  //add value to a give index
+  struct node* newVal = *head;
+  index = totIndex - index;
+  for (int i=0; newVal!=NULL && i<index; i++) {
+     newVal = newVal->next;
+  }
+  *((float *)(newVal->num)) *= multiVal;
+
+}
+
+//*********divide******//
+void diviF(struct node **head, int index, int totIndex, float diviVal) {
+  //add value to a give index
+  struct node* newVal = *head;
+  index = totIndex - index;
+  for (int i=0; newVal!=NULL && i<index; i++) {
+     newVal = newVal->next;
+  }
+  *((float *)(newVal->num)) /= diviVal;
+
+}
+
+//*********sub******//
+void subF(struct node **head, int index, int totIndex, float subVal) {
+  //add value to a give index
+  struct node* newVal = *head;
+  index = totIndex - index;
+  for (int i=0; newVal!=NULL && i<index; i++) {
+     newVal = newVal->next;
+  }
+
+  *((float *)(newVal->num)) -= subVal;
+
+}
+
+//*********set******//
+void setF(struct node **head, int index, int totIndex, float setVal) {
+  //add value to a give index
+  struct node* newVal = *head;
+  index = totIndex - index;
+  // for (int i=0; newVal!=NULL && i<index; i++) {
+  //    newVal = newVal->next;
+  // }
+
+  *((float *)(newVal->num)) = setVal;
+
+}
+
+
 //*a => value of a/defreferemced a
 //a => where *a is located aka the pointer
 //&a => pass by reference mem location
 //-> the next node that is point too
-
-//*a => value of a/defreferenced a
-//a => where *a is located aka the pointer
-//&a => pass by reference mem location
-
-/* void append(Node *n, Node *t) { */
-/*   Node* tempCopy = t->prev; */
-/*   tempCopy->next = n; */
-/*   n->prev = tempCopy; */
-/*   n->next = t; */
-/*   t->prev = n; */
-/* } //append */
-
-/* void freeList(Node* h) { */
-/*     while(h->next != NULL) { */
-/* 	    Node* curr = h->next; */
-/* 	    h->next = h->next->next; */
-/* 	    freeNode(curr); */
-/*     } //while */
-/*     freeNode(h); */
-/* } //freeList */

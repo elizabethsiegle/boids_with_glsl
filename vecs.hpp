@@ -1,20 +1,30 @@
 //vec2
 #ifndef VECS_H
 #define VECS_H
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+#include <GL/glew.h>
+#include <stdbool.h>
+#include <GLFW/glfw3.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <memory.h>
 
 class vector2 {
 public:
   float vec2Arr[2];
-  vector2(GLfloat, GLfloat);
+  vector2(float, float);
   void normalizeVec2();
-  void vec2Add(vector2);
+  void add(vector2);
 };
 
 //vector3
 class vector3 {
 public:
   float vec3Arr[3];
-  vector3(GLfloat, GLfloat,GLfloat);
+  vector3(float, float, float);
   void normalizeVec3();
   void add(vector3);
 };
@@ -23,8 +33,8 @@ public:
 class vector4 {
 public:
   float vec4Arr[4];
-  vector4(GLfloat, GLfloat,GLfloat, GLfloat);
-  vector4::normalizeVec4();
+  vector4(float, float, float, float);
+  void normalizeVec4();
   void add(vector4);
 };
 

@@ -5,28 +5,40 @@ LDFLAGS=-lX11 -lGL -lGLU -lglut -lGLEW -lglfw -lm
 endif
 
 CC = g++
+CPLUS = -x c++ -std=c++11
 CFLAGS=-g -I/opt/ports/include
 CXXFLAGS+=-g -Wall -I/opt/ports/include
 INIT_SHADER = initshader.o
-SOURCES= boid.c vecs.cpp mats.cpp
+SOURCES= mats.cpp vecs.cpp hw4.c initshader.c #boid.c
 OBJECTS=$(SOURCES:.c=.o)
 OBJECTS+=$(SOURCES:.cpp=.o)
-DEPS=common.h boid.h mats.hpp vecs.hpp
-EXECUTABLE=boid mats vecs
-
-boid: boid.o $(INITSHADER) common.h
-	$(CC) $@.o $(INITSHADER) $(LDFLAGS) -o $@
+DEPS=common.hpp mats.hpp vecs.hpp #boid.h
+EXECUTABLE= hw4 #boids mats vecs
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-%.o: %.cpp $(CXX) -c $(CXXFLAGS) $<
+	$(CC) $(CPLUS) -c -o $@ $< $(CFLAGS)
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) -o $@ $^ $(LDFLAGS) $(CFLAGS)
 
 clean:
-	rm *o $(EXECUTABLE)
+	rm *.o $(EXECUTABLE) core. dSYM
+
+#all: hw4 mats
+
+#hw4: hw4.o $(INIT_SHADER)
+#	$(CC) $@.o $(INIT_SHADER) $(LDFLAGS) -o $@
+
+#%.o: %.c $(DEPS)
+#	$(CC) -c -o $@ $< $(CFLAGS)
+
+#%.o: %.cpp $(CXX) -c $(CXXFLAGS) $<
+#
+# $(EXECUTABLE): $(OBJECTS)
+# 	$(CC) -o $@ $^ $(LDFLAGS) $(CFLAGS)
+
+#clean:
+	#rm -r hw4 mats *o $(EXECUTABLE)
 
 # example1: example1.o $(INIT_SHADER) common.h
 # 	$(CC) $@.o $(INIT_SHADER) $(LDFLAGS) -o $@
@@ -51,12 +63,12 @@ clean:
 # #-I/usr/local/Cellar/glfw3/3.2.1/include
 
 
-	# ifeq ($(shell uname -s), Darwin)
-	# LDFLAGS=-L/opt/local/lib -framework OpenGL -lglfw -lGLEW -lm
-	# else
-	# LDFLAGS=-lX11 -lGL -lGLU -lglfw -lGLEW -lm
-	# endif
-	# CC = gcc
-	# CFLAGS=-g -Wall -I/opt/local/include
-	# all: $@
-	# $@: $a.
+# ifeq ($(shell uname -s), Darwin)
+# LDFLAGS=-L/opt/local/lib -framework OpenGL -lglfw -lGLEW -lm
+# else
+# LDFLAGS=-lX11 -lGL -lGLU -lglfw -lGLEW -lm
+# endif
+# CC = gcc
+# CFLAGS=-g -Wall -I/opt/local/include
+# all: $@
+# $@: $a.
