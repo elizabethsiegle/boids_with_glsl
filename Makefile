@@ -7,13 +7,13 @@ endif
 CC = g++
 CPLUS = -x c++ -std=c++11
 CFLAGS=-g -I/opt/ports/include
-CXXFLAGS+=-g -Wall -I/opt/ports/include
+#CXXFLAGS+=-g -Wall -I/opt/ports/include
 INIT_SHADER = initshader.o
-SOURCES= mats.cpp vecs.cpp hw4.c initshader.c #boid.c
+SOURCES= mats.cpp vecs.cpp hw4.c initshader.c boid.c list.c
 OBJECTS=$(SOURCES:.c=.o)
-OBJECTS+=$(SOURCES:.cpp=.o)
-DEPS=common.hpp mats.hpp vecs.hpp #boid.h
-EXECUTABLE= hw4 #boids mats vecs
+# OBJECTS+=$(SOURCES:.cpp=.o) //???
+DEPS=common.hpp mats.hpp vecs.hpp boid.h list.h hw4.h
+EXECUTABLE= hw4 boids mats vecs list
 
 %.o: %.c $(DEPS)
 	$(CC) $(CPLUS) -c -o $@ $< $(CFLAGS)

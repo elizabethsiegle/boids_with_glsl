@@ -2,27 +2,18 @@
 //hw4
 //start with simple
 //add header file after
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-#include <time.h>
-#include <stdbool.h>
-#include "GL/glew.h"
-#ifdef __APPLE__
-#include <GLFW/glfw3.h>
-#include <GL/glu.h>
-#else
-#include <GLFW/glfw3.h>
-#include <GL/glu.h>
-#endif
-#include "list.c"
+#include "common.hpp"
+#include "list.h"
+// #include "list.c" //???
 #include "boid.h"
 #include "environment.h"
 // #include "LAB3.hpp"
-//#include "initshader.h" //idky make_bo, initshader funcs !link
-#include "initshader.hpp"
+//#include "initshader.hpp"
 #include "mats.hpp"
-// #include "vecs.hpp"
+#include "vecs.hpp"
+
+extern int numBoid;
+
 int view = 0;
 //********Globals*******//
 //Velocity, acceleration and heads
@@ -44,6 +35,13 @@ Node *sepz = NULL;
 Node *cox = NULL;
 Node *coy = NULL;
 Node *coz = NULL;
+struct node *headx = NULL;
+struct node *heady = NULL;
+struct node *headz = NULL;
+unsigned dsize = sizeof(double);
+unsigned bsize = sizeof(bool);
+unsigned isize = sizeof(int);
+unsigned fsize = sizeof(float);
 
 GLuint make_bo(GLenum type, const void *buf, GLsizei buf_size) {
     GLuint bufnum;
@@ -52,11 +50,13 @@ GLuint make_bo(GLenum type, const void *buf, GLsizei buf_size) {
     glBufferData(type, buf_size, buf, GL_STATIC_DRAW);
     return bufnum;
 }
-
-unsigned dsize = sizeof(double);
-unsigned bsize = sizeof(bool);
-unsigned isize = sizeof(int);
-
+GLubyte boid_wireframe_indices[10] = {
+  0, 1,
+  1, 2,
+  2, 0,
+  0, 3,
+  3, 1
+};
 GLfloat max[3] = {30, 30, 30};
 GLfloat min[3] = {.1, .1, .1};
 GLfloat direction[3];

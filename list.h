@@ -4,8 +4,15 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+typedef struct point {
+  float x;
+  float y;
+  float z;
+} Point;
+
 typedef struct node {
-  void *num;
+  Point position;
+  Point velocity;
   struct node *next;
 } Node;
 

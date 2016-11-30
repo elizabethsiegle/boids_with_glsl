@@ -2,16 +2,25 @@
 #include <stdbool.h>
 #include "list.h"
 
-void push(Node** head, void *new1, size_t dataSize) {
-    //Memory for node
-    Node* newNode = (struct node*)malloc(sizeof(struct node));
-    //new node
-    newNode->num  = malloc(dataSize);
-    newNode->next = (*head);
-    for(int i = 0; i < dataSize; i++) {
-        *(char *)(newNode->num + i) = *(char *)(new1);
-    }
-    (*head) = newNode;
+extern Node* head;
+
+Point *makePoint(float x, float y, float z) {
+  Point* newp = (Point*)malloc(sizeof(Point));
+  newp->x = x;
+  newp->y = y;
+  newp->z = z;
+}
+
+Node *makeNode(Point p1, Point p2) {
+  Node* newNode = (Node*)malloc(sizeof(Node));
+  newNode->position = p1;
+  newNode->velocity = p2;
+  newNode->next = NULL;
+}
+
+void push(Node* newNode) {
+    newNode->next = head;
+    head = newNode;
 }
 
 //****Delete list*****//
