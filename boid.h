@@ -1,8 +1,6 @@
 #ifndef BOID_H
 #define BOID_H
 
-
-
 void minusBoid();
 void draw_boid(GLfloat pos[3]);
 void addBoid();

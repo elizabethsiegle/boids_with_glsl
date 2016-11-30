@@ -13,12 +13,13 @@ typedef struct point {
 typedef struct node {
   Point position;
   Point velocity;
+  int index;
   struct node *next;
 } Node;
 
-void push(Node** head, void *new1, size_t dataSize);
-void deleteList(Node** head);
-void printList(Node *node, void (*fpoint)(void*));
+void push(Node* newNode);
+void deleteList(Node** head, Point *p);
+void printList();
 void printI(void *n);
 void printD(void *f);
 void printB(void *m);
@@ -31,9 +32,11 @@ double valD(struct node *node, int index, int totIndex);
 int valI(struct node *node, int index, int totIndex);
 void multiF(struct node **head, int index, int totIndex, float multiVal);
 void printFloat(void *k);
-void deleteNode(struct node **head, int index, int totIndex);
-void push(Node** head, void *new1, size_t dataSize);
-Node* makeNode();
+void deleteNode(Node *nodeToDelete); //head global
+// Node* makeNode();
+Node *makeNode(Point p1, Point p2, int ind);
 Node* makeList();
+Point *makePoint(float x, float y, float z);
+//void deleteNode(Node *head, Node *nodeToDelete);
 
 #endif

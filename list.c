@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "list.h"
 
-extern Node* head;
+extern Node* head; //!headx
 
 Point *makePoint(float x, float y, float z) {
   Point* newp = (Point*)malloc(sizeof(Point));
@@ -11,10 +11,11 @@ Point *makePoint(float x, float y, float z) {
   newp->z = z;
 }
 
-Node *makeNode(Point p1, Point p2) {
+Node *makeNode(Point p1, Point p2, int ind) {
   Node* newNode = (Node*)malloc(sizeof(Node));
   newNode->position = p1;
   newNode->velocity = p2;
+  newNode->index = ind;
   newNode->next = NULL;
 }
 
@@ -24,40 +25,59 @@ void push(Node* newNode) {
 }
 
 //****Delete list*****//
-void deleteList(Node** head) {
-   printf("\nlist deleted!\n");
-   struct node* here = *head;
-   struct node* next;
+// void deleteList(Node** head) {
+//    printf("\nlist deleted!\n");
+//    struct node* here = *head;
+//    struct node* next;
+//
+//    while(here != NULL) {
+//        next = here->next;
+//        //free node
+//        free(here);
+//        here = next;
+//        }
+//    *head = NULL;
+// }
 
-   while(here != NULL) {
-       next = here->next;
-       //free node
-       free(here);
-       here = next;
-       }
-   *head = NULL;
-}
+//data ugh
+void deleteNode(Node *nodeToDelete) {
+  if(head == nodeToDelete) {
+    if(head->next == NULL) {
+      return;
+    }
+    head->data = head->next->data;
+    nodeToDelete = head->next;
+    head->next = head->next->next;
+    free(nodeToDelete);
+    return;
+  }//if
+  //find prev node if !first node
+  Node *prev = head;
+  while(prev->next != NULL && prev->next != nodeToDelete) {
+    prev = prev->next;
 
-void deleteNode(struct node **head, int index, int totIndex) {
-   index = totIndex - index;
-   struct node* temp = *head;
-   //if it is the head
-   for (int i=0; temp!=NULL && i<index-1; i++) {
-         temp = temp->next;
-   }
-   struct node *next = temp->next->next;
-   free(temp->next);
-   temp->next = next;
+    //check if node really exists in LL
+    if(prev->next == NULL) {
+      printf("\n given node is not in LL");
+      return;
+    } //if
+
+    //remove node from LL
+    prev->next = prev->next->next;
+
+    //free mem
+    free(nodeToDelete);
+    return;
+  }
 }
 
 //*******Print******//
-void printList(struct node *node, void (*fpoint)(void *)) {
-  //prints backwards
-  // for(node; node != NULL; node = node->next) {
-  while(node != NULL) {
-       (*fpoint)(node->num);
-       node = node->next;
-      }
+void printList() {
+  while (head != NULL) {
+    printf("%d", head->data);
+    head = head->next;
+  } //while
+  printf("\n");
 }
 
 //integer
@@ -79,7 +99,6 @@ void printB(void *m) {
 void printFloat(void *k) {
    printf(" %f", *(float *)k);
 }
-
 
 //*********Return******//
 int valI(struct node *node, int index, int totIndex) {
