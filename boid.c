@@ -46,7 +46,6 @@ void addBoid() {
   randX += deciX;
   randY += deciY;
   randZ += deciZ;
-
   hpos = makePoint(randX, randY, randZ);
   hvel = makePoint(0.5, 0.5, 0.5); //vel, need to change
   headx= makeNode(*hpos, *hvel, numBoid);

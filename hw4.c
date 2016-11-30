@@ -1,5 +1,4 @@
 //hw4
-//hw4
 //start with simple
 //add header file after
 #include "common.hpp"
@@ -9,11 +8,9 @@
 #include "environment.h"
 // #include "LAB3.hpp"
 //#include "initshader.hpp"
-#include "mats.hpp"
-#include "vecs.hpp"
-
+// #include "mats.hpp"
+// #include "vecs.hpp"
 extern int numBoid;
-
 int view = 0;
 //********Globals*******//
 //Velocity, acceleration and heads
@@ -121,9 +118,11 @@ void init() {
 
 void moveTarget(int i, float spW){
     //x, y, z
-    vel[0]=valF(headx, i, numBoid);
-    vel[1]=valF(heady, i, numBoid);
-    vel[2]=valF(headz, i, numBoid);
+    for(int j = 0; j < 3; j++){
+      vel[j]=headx->index;
+    } //for
+    // vel[1]=valF(heady, i);
+    // vel[2]=valF(headz, i);
     for(int j = 0; j < 3; j++) {
       vel[j] = target[j]-vel[j];
       if(!pause) {
@@ -256,13 +255,13 @@ void reshape(GLFWwindow *w, int width, int height){
     }*/
 
 void normalize(int i) {
-   GLfloat xu = valF(headx, i, numBoid);
-   GLfloat yu = valF(heady, i, numBoid);
-   GLfloat zu = valF(headz, i, numBoid);
+   GLfloat xu = valF(headx, i);
+   GLfloat yu = valF(heady, i);
+   GLfloat zu = valF(headz, i);
    GLfloat m = 1/sqrt(xu*xu + yu*yu + zu*zu);
-   multiF(&headx, i, numBoid, m);
-   multiF(&heady, i, numBoid, m);
-   multiF(&headz, i, numBoid, m);
+  //  multiF(&headx, i, numBoid, m);
+  //  multiF(&heady, i, numBoid, m);
+  //  multiF(&headz, i, numBoid, m);
 }
 
 void step(GLfloat goal[3]){
@@ -277,9 +276,9 @@ void step(GLfloat goal[3]){
   for(int i = 1; i <= numBoid; i++) {
     printf("curent pos of");
     printf("%d ", i);
-    temp[0] = valF(headx, i, numBoid);
-    temp[1] = valF(heady, i, numBoid);
-    temp[2] = valF(headz, i, numBoid);
+    temp[0] = valF(headx, i);
+    temp[1] = valF(heady, i);
+    temp[2] = valF(headz, i);
     for(int j = 0; j < 3; j++) {
       printf(" %f ", temp[j]);
     }
@@ -384,18 +383,20 @@ void render() {
       mult = 0;
     }
     moveTarget(i, mult);
-    temp[0] = valF(headx, i, numBoid) + vel[0];
-    temp[1] = valF(heady, i, numBoid) + vel[1];
-    temp[2] = valF(headz, i, numBoid) + vel[2];
+    for(int j = 0; j < 3; j++) {
+      temp[j] = valF(headx, i) + vel[j];
+    }
+    // temp[1] = valF(headx->y, i) + vel[1];
+    // temp[2] = valF(headx->z, i) + vel[2];
     draw_boid(temp);
     printf("%d", i);
     printf("\n");
     printf("%d", headx);
     printf("\n");
     //update values
-    addF(&headx, i, numBoid, vel[0]);
-    addF(&heady, i, numBoid, vel[1]);
-    addF(&headz, i, numBoid, vel[2]);
+    addF(i, vel[0]);
+    // addF(&heady, i, numBoid, vel[1]);
+    // addF(&headz, i, numBoid, vel[2]);
     } //for
   }
 

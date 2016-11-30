@@ -1,7 +1,6 @@
 #ifndef HW4_H
 #define HW4_H
 
-
 GLuint make_bo(GLenum type, const void *buf, GLsizei buf_size);
 void init();
 void moveTarget(int i, float spW);
