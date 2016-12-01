@@ -1,6 +1,6 @@
 #ifndef HW4_H
 #define HW4_H
-
+extern int numBoid;
 GLuint make_bo(GLenum type, const void *buf, GLsizei buf_size);
 void init();
 void moveTarget(int i, float spW);
@@ -17,6 +17,7 @@ GLfloat square(GLfloat s);
 GLfloat dist(GLfloat x, GLfloat y, GLfloat z, GLfloat x2, GLfloat y2, GLfloat z2);
 void reshape(GLFWwindow *w, int width, int height);
 void normalize(int i);
+void ownRotate(GLdouble a);
 void step(GLfloat goal[3]);
 void keyboard(GLFWwindow *w, int key, int scancode, int action, int mods);
 void render();

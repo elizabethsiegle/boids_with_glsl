@@ -3,8 +3,6 @@
 #include "list.h"
 
 Node *head; //!headx
-//At each node are we point to 6 values?
-//How to for loop to get specfic index without passing an index into the function?
 //what is num in this version of the linked list see functions getF, deleteNode, addF, and setF
 
 Point *makePoint(float x, float y, float z) {
@@ -14,11 +12,10 @@ Point *makePoint(float x, float y, float z) {
   newp->z = z;
 }
 
-Node *makeNode(Point p1, Point p2, int ind) {
+Node *makeNode(Point p1, Point p2) {
   Node* newNode = (Node*)malloc(sizeof(Node));
   newNode->position = p1;
   newNode->velocity = p2;
-  newNode->index = ind;
   newNode->next = NULL;
 }
 
@@ -34,7 +31,6 @@ void deleteNode(Node *nodeToDelete) {
       printf("Trying to delete null node!");
       return;
     }
-
     head->position = head->next->position;
     nodeToDelete = head->next;
     head->next = head->next->next;
@@ -75,28 +71,15 @@ void printList() {
 float valF(Node *n, int index) {
   float temp = 0;
   for(int i = 0; i < index; i++) {
-   if(node != NULL) {
-     temp =  node->position.x;
-        node = node->next;
+   if(n != NULL) {
+     temp =  n->position.x;
+        n = n->next;
     } else {
       printf("list empty! \n");
     }
    }
    return temp;
 }
-
-// float getF(struct node *node, int index) {
-//   float temp = 0;
-//   for(int i = 0; i < index; i++) {
-//    if(node != NULL) {
-//      temp =  node->position.x;
-//         node = node->next;
-//     } else {
-//       printf("list empty! \n");
-//     }
-//    }
-//     return temp;
-// }
 
 void addF(int index, float addVal) {
   //add value to a give index

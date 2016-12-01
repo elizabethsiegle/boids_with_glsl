@@ -1,6 +1,4 @@
-//#include "common.hpp"
-#include <stdio.h>
-#include <stdlib.h>
+#include "common.hpp"
 
 //Create a NULL-terminated string by reading the provided file
 static char* readShaderSource(const char* shaderFile) {

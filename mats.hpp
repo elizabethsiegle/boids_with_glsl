@@ -1,5 +1,6 @@
 #ifndef MATS_H
 #define MATS_H
+#include "common.hpp"
 class mat2 {
 public:
   float mat2Arr[4];

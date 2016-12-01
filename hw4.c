@@ -1,16 +1,11 @@
 //hw4
 //start with simple
 //add header file after
-#include "common.hpp"
-#include "list.h"
-// #include "list.c" //???
-#include "boid.h"
+#include "list.c"
+// #include "list.h" //???
+#include "boid.c"
+//#include "boid.h"
 #include "environment.h"
-// #include "LAB3.hpp"
-//#include "initshader.hpp"
-// #include "mats.hpp"
-// #include "vecs.hpp"
-extern int numBoid;
 int view = 0;
 //********Globals*******//
 //Velocity, acceleration and heads
@@ -119,7 +114,7 @@ void init() {
 void moveTarget(int i, float spW){
     //x, y, z
     for(int j = 0; j < 3; j++){
-      vel[j]=headx->index;
+      vel[j]=headx->position.x;
     } //for
     // vel[1]=valF(heady, i);
     // vel[2]=valF(headz, i);
@@ -263,6 +258,16 @@ void normalize(int i) {
   //  multiF(&heady, i, numBoid, m);
   //  multiF(&headz, i, numBoid, m);
 }
+void ownRotate(GLdouble a) {
+  GLdouble s = a;
+  GLdouble c[4][4];
+  c[1][1] = c[3][3] = 1.0;
+  c[0][0] = c[2][2] = cos(s);
+  c[2][0] = sin(s);
+  c[0][2] = -c[2][0];
+  //mult??
+  glMultMatrixd(*c);
+}
 
 void step(GLfloat goal[3]){
   printf("\n___Step___ \n");
@@ -315,18 +320,17 @@ void keyboard(GLFWwindow *w, int key, int scancode, int action, int mods) {
    switch(action) {
      case GLFW_PRESS:
         switch(key) {
-	case GLFW_KEY_ENTER:
-           addBoid();
-        break;
-        case GLFW_KEY_END:
-         minusBoid();
-        break;
-        case GLFW_KEY_SPACE:
-	       stepBool = true;
-        break;
-
-        case GLFW_KEY_UP:
-	  target[1] += .1;
+          case GLFW_KEY_ENTER:
+            addBoid();
+            break;
+          case GLFW_KEY_END:
+            minusBoid();
+            break;
+          case GLFW_KEY_SPACE:
+	          stepBool = true;
+            break;
+          case GLFW_KEY_UP:
+	          target[1] += .1;
         break;
         case GLFW_KEY_DOWN:
 	  if(target[1] > .05) {

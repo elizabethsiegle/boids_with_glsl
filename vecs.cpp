@@ -1,10 +1,5 @@
-//vec2
-#include "vecs.hpp"
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
 #include "common.hpp"
-#include <math.h>
+
 using namespace std;
 
 vector2::vector2(float f1, float f2){

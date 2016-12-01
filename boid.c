@@ -48,7 +48,7 @@ void addBoid() {
   randZ += deciZ;
   hpos = makePoint(randX, randY, randZ);
   hvel = makePoint(0.5, 0.5, 0.5); //vel, need to change
-  headx= makeNode(*hpos, *hvel, numBoid);
+  headx= makeNode(*hpos, *hvel);
   printf("boid added!");
   push(headx);
   numBoid += 1;

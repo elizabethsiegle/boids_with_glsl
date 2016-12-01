@@ -4,9 +4,9 @@ else
 LDFLAGS=-lX11 -lGL -lGLU -lglut -lGLEW -lglfw -lXcursor -lXxf86vm -lXrandr -lXinerama -lm
 endif
 
-CC = g++
+CC = gcc
 CFLAGS=-g -I/opt/ports/include
-CXX = g++
+CXX = gcc
 CXXFLAGS =-g -I/opt/ports/include
 LIBS = -lGL -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr
 INIT_SHADER = initshader.o
@@ -18,7 +18,7 @@ hw4: hw4.o $(INIT_SHADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	-rm -r lab6 *.o core *.dSYM
+	-rm -r hw4 *.o core *.dSYM
 
 # ifeq ($(shell uname -s), Darwin)
 # LDFLAGS=-L/opt/ports/lib -framework OpenGL -lglfw -lGLEW -lm

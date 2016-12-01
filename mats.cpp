@@ -1,7 +1,4 @@
 #include "mats.hpp"
-#include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
 using namespace std;
 
 mat2::mat2(float f1, float f2, float f3, float f4) {
