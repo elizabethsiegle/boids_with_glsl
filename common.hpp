@@ -32,7 +32,6 @@
 //  Helper function to load vertex and fragment shader files
 GLuint initshader(const char* vertexShaderFile, const char* fragmentShaderFile);
 
-
 #define TRUE 1
 #define FALSE 0
 #endif // __COMMON_H__

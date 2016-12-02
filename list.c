@@ -43,20 +43,16 @@ void deleteNode(Node *nodeToDelete) {
   Node *prev = head;
   while(prev->next != NULL && prev->next != nodeToDelete) {
     prev = prev->next;
-
     //check if node really exists in LL
     if(prev->next == NULL) {
       printf("\n given node is not in LL");
       return;
     } //if
-
     //remove node from LL
     prev->next = prev->next->next;
-
     //free mem
     free(nodeToDelete);
     return;
- }
  }
 
 //*******Print******//
